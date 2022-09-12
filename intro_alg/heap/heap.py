@@ -27,6 +27,7 @@ def heapsort(A):
     n=len(A)
     build_max_heap(A,n)
     for i in range(len(A)-1,0,-1):
+        print(A)
         A[i],A[0]=A[0],A[i]
         max_heapify(A, i, 0)
 
@@ -34,6 +35,7 @@ def heapsort(A):
 #max_heapify(A, 1)
 #A=[4,1,3,2,16,9,10,14,8,7]
 #build_max_heap(A)
-A=[16,14,10,8,7,9,3,2,4,1]
+#A=[16,14,10,8,7,9,3,2,4,1]
+A=[5,13,2,25,7,17,20,8,4]
 heapsort(A)
 print(A)
