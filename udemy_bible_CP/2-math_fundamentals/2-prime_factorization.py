@@ -13,4 +13,3 @@ primeFact(10)
 primeFact(121)
 primeFact(131)
 primeFact(500)
-            
