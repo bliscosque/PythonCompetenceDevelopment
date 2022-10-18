@@ -81,6 +81,53 @@ class Binary_Tree:
             return root
         self.root=build_subtree(A, 0, len(A)-1)
 
+    def subtree_rotate_right(self):
+        assert self.left
+        B, E = self.left, self.right
+        A, C = B.left, B.right
+        self, B = B, self
+        self.item, B.item = B.item, self.item
+        B.left, B.right = A, self
+        self.left, self.right = C, E
+        if A: A.parent = B
+        if E: E.parent = self
+        # B.subtree_update()
+        # D.subtree_update()
+
+    def subtree_rotate_left(self):
+        assert self.right
+        A, D = self.left, self.right
+        C, E = D.left, D.right
+        self, D = D, self
+        self.item, D.item = D.item, self.item
+        D.left, D.right = D, self
+        self.left, self.right = A, C
+        if A: A.parent = self
+        if E: E.parent = D
+        # B.subtree_update()
+        # D.subtree_update()
+
+    def skew(self):
+        return height(self.right) - height(self.left)
+
+    def rebalance(self):
+        if self.skew() == 2:
+            if self.right.skew() < 0:
+                self.right.subtree_rotate_right()
+            self.subtree_rotate_left()
+        elif self.skew() == -2:
+            if self.left.skew() > 0:
+                self.left.subtree_rotate_left()
+            self.subtree_rotate_right()
+
+    def maintain(self):
+        self.rebalance()
+        self.subtree_update()
+        if self.parent: self.parent.maintain()
+
+    def height(self):
+        if A is None: return -1
+        return 1+max(height(self.left), height(self.right))
 
 def subtree_print(A):
     if A.left:subtree_print(A.left)
