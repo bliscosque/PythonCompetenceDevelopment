@@ -6,7 +6,7 @@ def longest_subarr_most_k_dis(A,k):
     r=0
     for r in range(0,n):
         fr[A[r]]+=1
-        if fr[A[r]]==1: cnt+=1 #primeira vez que el aparece
+        if fr[A[r]]==1: cnt+=1 #primeira vez que ele aparece
         if cnt>k: break #chegou no max dos elem
     if cnt<=k: return n #todos os elementos
     fr[A[r]]-=1
