@@ -81,6 +81,12 @@ class SLL:
                     idx+=1
                 nextNode=tempNode.next
                 tempNode.next=nextNode.next
+    def deleteEntireSLL(self):
+        if self.head is None:
+            print("SLL is empty")
+        else:
+            self.head=None
+            self.tail=None
                     
 
 sll = SLL()
@@ -99,4 +105,6 @@ print([node.value for node in sll])
 sll.deleteNodeSLL(-1)
 print([node.value for node in sll])
 sll.deleteNodeSLL(1)
+print([node.value for node in sll])
+sll.deleteEntireSLL()
 print([node.value for node in sll])
