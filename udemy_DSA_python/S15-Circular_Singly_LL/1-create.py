@@ -64,6 +64,38 @@ class CSLL:
                 node=node.next
                 if node==self.tail.next: break # chegou ao fim
             return "Value does not exists in list"
+    def deleteNodeCSLL(self,location):
+        if self.head is None:
+            print("CSLL is empty")
+        else:
+            if location==0: # primeiro no
+                if self.head==self.tail: # temos apenas 1 no
+                    self.head.next=None
+                    self.head=None
+                    self.tail=None
+                else: # mais de um nó
+                    self.head=self.head.next
+                    self.tail.next=self.head
+            elif location==-1: #deletar no final
+                if self.head==self.tail: # temos apenas 1 no
+                    self.head.next=None
+                    self.head=None
+                    self.tail=None
+                else: # mais de um nó
+                    node=self.head
+                    while node is not None:
+                        if node.next == self.tail: break
+                        node=node.next
+                    node.next=self.head
+                    self.tail=node
+            else:
+                tempNode=self.head
+                idx=0
+                while idx < location-1:
+                    tempNode=tempNode.next
+                    idx+=1
+                nextNode=tempNode.next
+                tempNode.next=nextNode.next
 
 csll = CSLL()
 csll.createCSLL(1)
@@ -78,4 +110,8 @@ print(csll.searchCSLL(1))
 print(csll.searchCSLL(99))
 
 print([node.value for node in csll])
-csll.traverseCSLL()
+#csll.traverseCSLL()
+csll.deleteNodeCSLL(-1)
+csll.deleteNodeCSLL(1)
+csll.deleteNodeCSLL(0)
+print([node.value for node in csll])
