@@ -54,6 +54,16 @@ class CSLL:
                 print(node.value)
                 node=node.next
                 if node==self.tail.next: break # chegou ao fim
+    def searchCSLL(self, nodeValue):
+        if self.head is None:
+            return "CSLL is empty"
+        else:
+            node=self.head
+            while node:
+                if node.value==nodeValue: return node.value
+                node=node.next
+                if node==self.tail.next: break # chegou ao fim
+            return "Value does not exists in list"
 
 csll = CSLL()
 csll.createCSLL(1)
@@ -62,7 +72,10 @@ csll.insertCSLL(-1, 0)
 csll.insertCSLL('p1', 1)
 csll.insertCSLL('pend', -1)
 csll.traverseCSLL()
-
+print("###")
+print(csll.searchCSLL('pend'))
+print(csll.searchCSLL(1))
+print(csll.searchCSLL(99))
 
 print([node.value for node in csll])
 csll.traverseCSLL()
