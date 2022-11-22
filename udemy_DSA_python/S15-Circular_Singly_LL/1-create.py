@@ -97,6 +97,14 @@ class CSLL:
                 nextNode=tempNode.next
                 tempNode.next=nextNode.next
 
+    def deleteEntireCSLL(self):
+        if self.head is None:
+            print("CSLL is empty")
+        else:
+            self.head=None
+            self.tail.next=None
+            self.tail=None
+
 csll = CSLL()
 csll.createCSLL(1)
 csll.insertCSLL(0, 0)
@@ -114,4 +122,7 @@ print([node.value for node in csll])
 csll.deleteNodeCSLL(-1)
 csll.deleteNodeCSLL(1)
 csll.deleteNodeCSLL(0)
+print([node.value for node in csll])
+
+csll.deleteEntireCSLL()
 print([node.value for node in csll])
