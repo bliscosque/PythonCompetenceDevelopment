@@ -45,6 +45,15 @@ class CSLL:
                 tmpNode.next=newNode
                 newNode.next=nextNode
             return "Node inserted"
+    def traverseCSLL(self):
+        if self.head is None:
+            print("CSLL is empty")
+        else:
+            node=self.head
+            while node:
+                print(node.value)
+                node=node.next
+                if node==self.tail.next: break # chegou ao fim
 
 csll = CSLL()
 csll.createCSLL(1)
@@ -52,6 +61,8 @@ csll.insertCSLL(0, 0)
 csll.insertCSLL(-1, 0)
 csll.insertCSLL('p1', 1)
 csll.insertCSLL('pend', -1)
+csll.traverseCSLL()
 
 
 print([node.value for node in csll])
+csll.traverseCSLL()
