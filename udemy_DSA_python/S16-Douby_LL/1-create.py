@@ -49,6 +49,24 @@ class DoublyLL:
                 newNode.next.prev=newNode
                 tmpNode.next=newNode
 
+    def traverseDLL(self):
+        if self.head is None:
+            print("No elem")
+        else:
+            tmpNode=self.head
+            while tmpNode:
+                print(tmpNode.value)
+                tmpNode=tmpNode.next
+
+    def reverseTraverseDLL(self):
+        if self.head is None:
+            print("No elem")
+        else:
+            tmpNode=self.tail
+            while tmpNode:
+                print(tmpNode.value)
+                tmpNode=tmpNode.prev
+
 doublyLL=DoublyLL()
 doublyLL.createSLL(5)
 print([node.value for node in doublyLL])
@@ -56,3 +74,5 @@ doublyLL.insertNode(0, 0)
 doublyLL.insertNode(2, -1)
 doublyLL.insertNode(1, 1)
 print([node.value for node in doublyLL])
+doublyLL.traverseDLL()
+doublyLL.reverseTraverseDLL()
