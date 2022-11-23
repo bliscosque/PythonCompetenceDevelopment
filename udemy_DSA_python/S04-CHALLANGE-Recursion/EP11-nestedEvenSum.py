@@ -22,4 +22,14 @@ obj2 = {
 }
 
 def nestedEvenSum(obj, sum=0):
-    pass
+    if len(obj)==0: return 0
+    for key in obj:
+      if type(obj[key]) is dict:
+        sum+=nestedEvenSum(obj[key])
+      else: 
+        if type(obj[key]) is int and obj[key]%2==0:
+          sum+=obj[key]
+    return sum
+
+print(nestedEvenSum(obj1))
+print(nestedEvenSum(obj2))
