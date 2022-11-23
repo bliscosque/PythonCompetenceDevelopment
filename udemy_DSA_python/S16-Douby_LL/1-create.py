@@ -67,6 +67,16 @@ class DoublyLL:
                 print(tmpNode.value)
                 tmpNode=tmpNode.prev
 
+    def search(self, value):
+        if self.head is None:
+            print("No elem")
+        else:
+            tmpNode=self.head
+            while tmpNode:
+                if tmpNode.value==value: return tmpNode.value
+                tmpNode=tmpNode.next
+            return "Not find in list"
+
 doublyLL=DoublyLL()
 doublyLL.createSLL(5)
 print([node.value for node in doublyLL])
@@ -76,3 +86,5 @@ doublyLL.insertNode(1, 1)
 print([node.value for node in doublyLL])
 doublyLL.traverseDLL()
 doublyLL.reverseTraverseDLL()
+print(doublyLL.search(5))
+print(doublyLL.search(99))
