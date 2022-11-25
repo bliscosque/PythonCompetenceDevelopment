@@ -112,7 +112,77 @@ def searchBT(rootNode,nodeValue):
             if root.value.lChild is not None: customQueue.enqueue(root.value.lChild)
             if root.value.rChild is not None: customQueue.enqueue(root.value.rChild)
         return "Value does not exists"
+def insertNodeBT(rootNode,newNode):
+    if not rootNode: #root node nao existe
+        rootNode=newNode
+    else:
+        customQueue=Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root=customQueue.dequeue()
+            if root.value.lChild is not None: customQueue.enqueue(root.value.lChild)
+            else: # primeiro posicao livre
+                root.value.lChild=newNode
+                return "Inserted"
+            if root.value.rChild is not None: customQueue.enqueue(root.value.rChild)
+            else: # primeiro posicao livre
+                root.value.rChild=newNode
+                return "Inserted"
 
+def getDeepestNode(rootNode): #usa Level Order Trav
+    if not rootNode: return #root node nao existe
+    else:
+        customQueue=Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root=customQueue.dequeue()            
+            if root.value.lChild is not None: customQueue.enqueue(root.value.lChild)
+            if root.value.rChild is not None: customQueue.enqueue(root.value.rChild)
+        deepestNode=root.value
+        return deepestNode
+
+def deleteDeepestNode(rootNode,dNode):
+    if not rootNode: return
+    else:
+        customQueue=Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root=customQueue.dequeue()
+            if root.value is dNode:
+                root.value=None
+                return
+            if root.value.rChild is dNode:
+                root.value.rChild=None
+                return
+            else:
+                customQueue.enqueue(root.value.rChild)
+            if root.value.lChild is dNode:
+                root.value.lChild=None
+                return
+            else:
+                customQueue.enqueue(root.value.lChild)
+
+def deleteNodeBT(rootNode, node):
+    if not rootNode: return
+    else:
+        customQueue=Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root=customQueue.dequeue()
+            if root.value.data==node:
+                dNode=getDeepestNode(rootNode)
+                root.value.data=dNode.data
+                deleteDeepestNode(rootNode, dNode)
+                return "OK"
+                return
+            if (root.value.lChild is not None): customQueue.enqueue(root.value.lChild)
+            if (root.value.rChild is not None): customQueue.enqueue(root.value.rChild)
+        return "NOK"
+
+def deleteBT(rootNode):
+    rootNode.data=None
+    rootNode.lChild=None
+    rootNode.rChild=None
 
 newBT = TreeNode("Drinks")
 leftChild = TreeNode("Hot")
@@ -134,3 +204,18 @@ levelOrderTraversal(newBT)
 print()
 print(searchBT(newBT, "Tea"))
 print(searchBT(newBT, "Other"))
+
+newNode=TreeNode("Cola")
+insertNodeBT(newBT, newNode)
+print()
+print(newBT)
+#deletion
+print("DELETION")
+print(getDeepestNode(newBT).data)
+deepestNode=getDeepestNode(newBT)
+deleteDeepestNode(newBT, deepestNode)
+print(newBT)
+deleteNodeBT(newBT, 'Hot')
+print(newBT)
+deleteBT(newBT)
+print(newBT)
