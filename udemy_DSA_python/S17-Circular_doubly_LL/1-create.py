@@ -109,6 +109,18 @@ class CircularDoublyLL:
                 tmpNode.next=tmpNode.next.next
                 tmpNode.next.prev=tmpNode
             print("OK")
+    def deleteCDLL(self):
+        if self.head is None: print("No node in CDLL")
+        else:
+            self.tail.next=None
+            tmpNode=self.head
+            while tmpNode:
+                tmpNode.prev=None
+                tmpNode=tmpNode.next
+                if tmpNode==self.head: break
+            self.head=None
+            self.tail=None
+            print("OK")
 
 
 circDLL = CircularDoublyLL()
@@ -127,4 +139,6 @@ print([node.value for node in circDLL])
 circDLL.deleteNode(-1)
 print([node.value for node in circDLL])
 circDLL.deleteNode(1)
+print([node.value for node in circDLL])
+circDLL.deleteCDLL()
 print([node.value for node in circDLL])
