@@ -105,4 +105,10 @@ def searchNode(rootNode,nodeValue):
             print("Found")
         else: searchNode(rootNode.rChild,nodeValue)
 
+def deleteAVL(rootNode):
+    rootNode.data=None
+    rootNode.lChild=None
+    rootNode.rChild=None
+    return "OK"
+
 newAVL=AVLNode(10)
