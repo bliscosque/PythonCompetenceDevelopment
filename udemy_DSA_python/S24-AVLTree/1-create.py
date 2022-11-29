@@ -148,7 +148,47 @@ def insertNode(rootNode, nodeValue):
         return leftRotate(rootNode)
     if balance < -1 and nodeValue < rootNode.rChild.data: # RL
         rootNode.rChild = rightRotate(rootNode.rChild)
-        leftRotate(rootNode)
+        return leftRotate(rootNode)
+    return rootNode
+
+def getMinValueNode(rootNode):
+    if rootNode is None or rootNode.lChild is None: return rootNode
+    return getMinValueNode(rootNode.lChild)
+
+def deleteNode(rootNode, nodeValue):
+    if rootNode is None:
+        return rootNode
+    if nodeValue < rootNode.data:
+        rootNode.lChild=deleteNode(rootNode.lChild, nodeValue)
+    elif nodeValue > rootNode.data:
+        rootNode.rChild=deleteNode(rootNode.rChild,nodeValue)
+    else: 
+        # only 1 child
+        if rootNode.lChild is None:
+            tmp=rootNode.rChild
+            rootNode=None
+            return tmp
+        if rootNode.rChild is None:
+            tmp=rootNode.lChild
+            rootNode=None
+            return tmp
+        # 2 children
+        tmp=getMinValueNode(rootNode.rChild)
+        rootNode.data=tmp.data
+        rootNode.rChild=deleteNode(rootNode.rChild, tmp.data)
+    # Rotation is required
+    rootNode.height=1+max(getHeight(rootNode.lChild), getHeight(rootNode.rChild))
+    balance=getBalance(rootNode)
+    if balance > 1 and getBalance(rootNode.lChild) >=0: # LL
+        return rightRotate(rootNode)
+    if balance > 1 and getBalance(rootNode.lChild) < 0: # LR
+        rootNode.lChild=leftRotate(rootNode.lChild) 
+        return rightRotate(rootNode)
+    if balance < -1 and getBalance(rootNode.lChild) <=0: # RR
+        return leftRotate(rootNode)
+    if balance < -1 and getBalance(rootNode.lChild) > 0: # RL
+        rootNode.rChild = rightRotate(rootNode.rChild)
+        return leftRotate(rootNode)
     return rootNode
 
 def deleteAVL(rootNode):
@@ -161,4 +201,5 @@ newAVL=AVLNode(5)
 newAVL=insertNode(newAVL, 10)
 newAVL=insertNode(newAVL, 15)
 newAVL=insertNode(newAVL, 20)
+newAVL=deleteNode(newAVL, 15)
 levelOrderTraversal(newAVL)
