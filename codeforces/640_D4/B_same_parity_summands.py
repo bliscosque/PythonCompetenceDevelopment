@@ -1,20 +1,28 @@
 def solve():
     n,k=[int(i) for i in input().split()]
-    if (n%2==1): #soma impar
-        if n>=k and k%2==1: # qnt impar de elementos... se for par, nao terá solucao
-            print ("YES1")
-        else:
-            print("NO1")
-    else: # soma par
-        if n>=k/2: # qnt par de elementos
-            print ("YES2")
-            ans='2 '*(n//k)
-            ans+=str(n-(2*n//k))
+    if (n%2==0): #soma par
+        if n/2>=k and k%2==1: # qnt impar de elementos... resposta precisa ser de pares
+            print ("YES")
+            ans='2 '*(k-1)
+            ans+=str(n-(2*(k-1)))
             print(ans)
-        elif n>=k and k%2==1: # soma par nao funciona... testando soma impar (valido apenas qnt// impar de elem)
-            print ("YES3")
+        #n par e k impar ->no
+        elif n>=k and k%2==0:
+            print ("YES")
+            ans='1 '*(k-1)
+            ans+=str(n-(k-1))
+            print(ans)
         else:
-            print("NO2")
+            print("NO")
+    else: # soma impar
+        if n>=k and k%2==1: # n impar, k impar
+            print ("YES")
+            ans='1 '*(k-1)
+            ans+=str(n-(k-1))
+            print(ans)
+        #n impar, k par -> no
+        else:
+            print("NO")
 
 for _ in range(int(input())):
     solve()
