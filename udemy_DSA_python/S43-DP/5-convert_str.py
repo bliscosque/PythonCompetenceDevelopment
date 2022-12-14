@@ -14,5 +14,31 @@ def findMinOperation(s1, s2, idx1, idx2, dpDict):
             dpDict[dictKey]=min(delepeOpt, insertOpt, replaceOpt)
         return dpDict[dictKey]
 
+#Bottom Up
+def findMinOperationBU(s1,s2, tmpDict):
+    for i1 in range(len(s1)+1):
+        dictkey=str(i1)+'0'
+        tmpDict[dictkey]=i1
+    for i2 in range(len(s2)+1):
+        dictkey='0'+str(i2)
+        tmpDict[dictkey]=i2
+
+    for i1 in range(1,len(s1)+1):
+        for i2 in range(1,len(s2)+1):
+            if s1[i1-1]==s2[i2-1]:
+                dictkey=str(i1)+str(i2)
+                dictkey1=str(i1-1)+str(i2-1)
+                tmpDict[dictkey]=tmpDict[dictkey1]
+            else:
+                dictkey=str(i1)+str(i2)
+                dictkeyD=str(i1-1)+str(i2)
+                dictkeyI=str(i1)+str(i2-1)
+                dictkeyR=str(i1-1)+str(i2-1)
+                tmpDict[dictkey]=1+min(tmpDict[dictkeyD], min(tmpDict[dictkeyI],tmpDict[dictkeyR]))
+    dictkey=str(len(s1))+str(len(s2))
+    return tmpDict[dictkey]
+    
 print(findMinOperation('catch', 'carch',0,0, {}))
 print(findMinOperation('table', 'tbrles',0,0, {}))
+
+print(findMinOperationBU('catch', 'carch', {}))
