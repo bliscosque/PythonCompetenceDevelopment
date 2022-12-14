@@ -73,12 +73,36 @@ print(f'Case: #{testCase}: {ans:.2f}') #imprimir como float e 2 cadas decimais
     # No material do livro há a implementacao possível, utilizada para verificar se grafos sao conectados.
 
 # Tecnicas
-# Comparacao
+# 1.Comparacao - sao comparadas de maneira lexicografica, sendo 1o elemento, seguido do 2o elemento, etc
 def majority(L):
     count={}
     for word in L:
         if word in count: count[word]+=1
         else: count[word]=1
-    val_max,arg_max=min((-count[word],word) for word in count)
+    val_max,arg_max=min((-count[word],word) for word in count) # equivalente a expressao abaixo
+    # val_max2,arg_max2=max((count[word],word) for word in count)
     return arg_max
 print(majority("ThiagooTT"))
+
+# 2. Sorting
+#O(n log n)
+
+# 3. Sweep Line - TBS (To be studied)
+
+# 4. Greedy - TBS
+
+# 5. Dynamic Programming
+#tip: adicionando o decorador @lru_cache(maxsize=None) (da biblioteca functools), evitamos a explosao combinatorial de chamadas. 
+# Ou seja, transformamos automaticamente uma implementacao recursiva em DP
+#Exemplo abaixo para fibo
+from functools import lru_cache
+@lru_cache(maxsize=None) 
+def fibo_naive(n): 
+    if n<=1: return n
+    return fibo_naive(n - 1) + fibo_naive(n - 2)
+
+print(fibo_naive(10))
+
+# 6. Encoding of Sets by Integers - TBS
+
+# 7. Binary search
