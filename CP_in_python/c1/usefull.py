@@ -63,7 +63,7 @@ print(f'Case: #{testCase}: {ans:.2f}') #imprimir como float e 2 cadas decimais
 #DS and how to quick use it in python
 # Stacks -> use a list, having append as push and accessing/deleting last elem as pop
 # Dicionarios -> built in no python
-# Queue -> há 2 implementacoes: Queue (suporta multiprocessamento - nao recomendado para CP) / deque (double ended queue - recomendado)
+# Queue -> há 2 implementacoes: Queue (suporta multiprocessamento - nao recomendado para CP) / deque (double ended queue - recomendado - biblioteca collections)
    # metodos: append(elem), popleft(), appendleft(elem), pop()
 # Priority queues and heaps -> modulo heapq
     # metodos: converter array A em heap (heapify(A)), add elem: (heappush(heap, elem)) e extrair elem min: (heappop(heap))
