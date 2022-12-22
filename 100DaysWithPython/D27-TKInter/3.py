@@ -9,7 +9,7 @@ window.minsize(width=500,height=300)
 window.config(padx=20,pady=20)
 
 my_lbl=tkinter.Label(text="Label", font=("Arial",24,"bold"))
-my_lbl.grid(column=0,row=0) #automatic center on screen
+my_lbl.grid(column=0,row=0) 
 
 #button
 button=tkinter.Button(text="Click me",command=button_clicked)
