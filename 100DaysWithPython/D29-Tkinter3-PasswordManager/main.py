@@ -1,9 +1,29 @@
 import tkinter as tk
 # usado para messagebox
 from tkinter import messagebox
+from random import choice, randint, shuffle
+# https://pypi.org/project/pyperclip/
+# pip install pyperclip
+import pyperclip
 
 # Documentacao dos widgets do Tk: https://tkdocs.com/tutorial/widgets.html
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+#Password Generator Project
+def generate_password():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    password_letters = [choice(letters) for _ in range(randint(8, 10))]
+    password_symbols = [choice(symbols) for _ in range(randint(2, 4))]
+    password_numbers = [choice(numbers) for _ in range(randint(2, 4))]
+
+    password_list = password_letters + password_symbols + password_numbers
+    shuffle(password_list)
+
+    password = "".join(password_list)
+    ipt_pass.insert(0, password)
+    pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def addToFile():
@@ -48,7 +68,7 @@ ipt_email.insert(0,"bliscosque@yahoo.com.br") #0: insere no inicio; END: no fina
 ipt_pass=tk.Entry(width=20)
 ipt_pass.grid(row=3,column=1, sticky="EW")
 
-btn_generate=tk.Button(text="Generate Password")
+btn_generate=tk.Button(text="Generate Password", command=generate_password)
 btn_generate.grid(column=2,row=3, sticky="EW")
 btn_add=tk.Button(text="Add", width=36, command=addToFile)
 btn_add.grid(column=1,row=4, columnspan=2, sticky="EW")
