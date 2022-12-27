@@ -24,6 +24,9 @@ def solve():
     for i in range(n-2+1): #o +1 é para compensar o 0 na primeira posicao
         for j in range(i+2,n+1):
             #print (i,j)
+            # DICA DO VIDEO: https://www.youtube.com/watch?v=r9__zjVM2mE
+            # O valor máximo pode ser 8000. Se passar desse valor, já nao continua
+            if parcialSum[j]-parcialSum[i]>8000: break
             sums.add(parcialSum[j]-parcialSum[i])
     sums.add(parcialSum[-1]) #todos os elementos 
     #print(sums)
