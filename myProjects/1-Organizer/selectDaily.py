@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import uuid
+from datetime import date
 import json
 
 global my_data_list
@@ -59,10 +59,35 @@ def load_trv_with_json():
             values=(uuid,tName,hours,perc_completed,sDate,fDate,'N'))
         rowIdx+=1
 
-def trvClicked():
-    trv.update()
+def trvClicked(event):
+    for selected_item in trv.selection():
+        item = trv.item(selected_item)
+        record = item['values']
+        #print(record)
+        if (record[-1]=='N'): record[-1]='Y'
+        else: record[-1]='N'
+        trv.item(selected_item,values=record)
+        
 
-trv.bind("<ButtonRelease>",trvClicked)
+trv.bind("<<TreeviewSelect>>",trvClicked)
+
+def saveTodayList():
+    today=date.today().strftime("%Y-%m-%d")
+    print(today)
+    daily={
+        "date":today,
+        "items": []
+    }
+    for item in trv.get_children():
+        line=trv.item(item)['values']
+        if line[-1]=='Y':
+            daily['items'].append(line[0])
+    fName=today+'.json'
+    with open("C:\\Thiago\\organizer\\"+fName,"w") as dFile:
+        json.dump(daily,dFile,indent=4)
+
+btnSave=Button(window,text="Save",padx=5,pady=10,command=saveTodayList)
+btnSave.grid(row=2,column=0,sticky='N')
 
 load_json()
 load_trv_with_json()
