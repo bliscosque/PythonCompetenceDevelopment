@@ -1,3 +1,4 @@
+from bisect import bisect_left
 def solve():
     n,q=[int(i) for i in input().split()]
     a=[int(i) for i in input().split()]
@@ -31,16 +32,13 @@ def solve():
     #     if not ok: print(-1)
     # print(p_sum)
 
+    #print(p_sum)
     for _ in range(q):
         x=int(input())
-        # print(f'x: {x}')
-        ok=False
-        for i in range(len(p_sum)):
-            if p_sum[i]>=x:
-                print(i+1)
-                ok=True
-                break
-        if not ok: print(-1)
+        sear=bisect_left(p_sum,x)
+        if sear==len(p_sum): print(-1)
+        else: print(sear+1)
+        
 
 for _ in range(int(input())):
     solve()
