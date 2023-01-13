@@ -2,7 +2,7 @@ from collections import Counter
 
 def solve():
     n,k=map(int, input().split())
-    a=list(map(int, input().split()))
+    a=sorted(list(map(int, input().split())))+[0]*k
     
     #s2=set()
     #print(dct)
@@ -10,9 +10,14 @@ def solve():
     
     # add only valid elem to s2
     L=[]
-    dct=Counter(a)
-    for el,v in dct.items():
-        if v>=k: L.append(el)
+    for i in range(n):
+        if a[i]==a[i+k-1]:
+            L.append(a[i])
+    L=list(set(L))
+
+    #dct=Counter(a)
+    #for el,v in dct.items():
+    #    if v>=k: L.append(el)
     #print(L)
 
     # if k==1:
@@ -42,26 +47,40 @@ def solve():
     #s2=sorted(s2)
 
     L.sort()
-    start=0
-    cnt=1
-    ans=[]
-    #print(L)
-    for i in range(1,len(L)):
-        if cnt+L[start]==L[i]:
-            cnt+=1
-            continue
+    long=(0,L[0])
+    curr=(0,L[0])
+    prev=L[0]
+    for i in L[1:]:
+        if prev == i - 1:
+            curr = (curr[0] + 1,i)
         else:
-            ans.append((L[start],L[i-1]))
-            start=i
-            cnt=1
-    ans.append((L[start],L[i]))
-    maxL=-1
-    minAll=maxAll=L[0]
-    for (s,e) in ans:
-        if e-s>maxL:
-            maxL=e-s
-            minAll=s
-            maxAll=e
+            long = max(long,curr)
+            curr = (0,i)
+        prev = i
+    ans = max(long,curr)
+    print(ans[1]-ans[0],ans[1])
+
+
+    # start=0
+    # cnt=1
+    # ans=[]
+    #print(L)
+    # for i in range(1,len(L)):
+    #     if cnt+L[start]==L[i]:
+    #         cnt+=1
+    #         continue
+    #     else:
+    #         ans.append((L[start],L[i-1]))
+    #         start=i
+    #         cnt=1
+    # ans.append((L[start],L[i]))
+    # maxL=-1
+    # minAll=maxAll=L[0]
+    # for (s,e) in ans:
+    #     if e-s>maxL:
+    #         maxL=e-s
+    #         minAll=s
+    #         maxAll=e
 
 
     # i=0
@@ -94,7 +113,7 @@ def solve():
     #             minAll=min_el
     #             maxAll=min_el+cnt-1
     
-    print(minAll,maxAll)
+    # print(minAll,maxAll)
 
 for _ in range(int(input())):
     solve()
