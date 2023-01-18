@@ -5,7 +5,7 @@ def sumx(hh,mm,x):
     hhI=int(hh)
     mmI=int(mm)
     mmI+=x
-    if mmI>60:
+    if mmI>59:
         hhI+=mmI//60
         mmI=mmI%60
         if hhI>23:
@@ -20,7 +20,7 @@ def solve():
     if ispal(hh,mm): ans+=1
     hhN,mmN=sumx(hh,mm,x)
     # print(hhN,mmN)
-    while (hhN+mmN != hh+mm):
+    while (hhN!=hh or mmN!=mm):
         #print(hhN,mmN)
         if ispal(hhN,mmN): ans+=1
         hhN,mmN=sumx(hhN,mmN,x)
