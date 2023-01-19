@@ -7,8 +7,8 @@ def solve():
     for i in range(1,n+1):
         for j in range(1,n+1):
             if (i==j): continue
-            if a[i]>=j and a[j]<=i:
-                #print(a[i],j) 
+            if a[i]>=i and a[j]<=j and i <= j:
+                #print(f'{a[i]} <-> {i} | {a[j]} <-> {j}') 
                 cross+=1
     print(cross)
 
