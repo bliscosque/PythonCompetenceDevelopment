@@ -7,10 +7,10 @@ def solve():
     for i in range(1,n+1):
         for j in range(1,n+1):
             if (i==j): continue
-            if a[i]>=i and a[j]<=j and i <= j:
+            if (i>j and a[i]<=a[j]) or (i<j and a[i]>=a[j]):
                 #print(f'{a[i]} <-> {i} | {a[j]} <-> {j}') 
                 cross+=1
-    print(cross)
+    print(cross//2)
 
 for _ in range(int(input())):
     solve()
