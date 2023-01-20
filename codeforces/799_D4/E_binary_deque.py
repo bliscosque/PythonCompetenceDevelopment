@@ -1,4 +1,7 @@
+import sys
 import math
+
+sys.setrecursionlimit(10**6)
 def solve():
     n,s=[int(x) for x in input().split()]
     a=[int(x) for x in input().split()]
@@ -10,7 +13,7 @@ def solve():
         print(-1)
         return
     def solve_dp(a,l,r,s,dct={}):
-        #if l>r or l==len(a) or r==-1: return math.inf
+        if l==len(a) or r==-1: return math.inf
         if (l,r) in dct: return dct[(l,r)]
         if s==0: return 0
         if a[l]==0:
