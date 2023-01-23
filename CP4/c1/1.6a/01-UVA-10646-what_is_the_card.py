@@ -1,19 +1,22 @@
-def solve():
+def solve(i):
     cards=[s for s in input().split()]
-    new_pile=[]
+    hands=cards[-25:]
+    del cards[-25:]
+    #print(hands)
+    #print(cards)
     y=0
     for _ in range(3):
         top=cards[-1]
+        #print(top)
         if '2'<=top[0]<='9':
             x=int(top[0])
         else: 
             x=10
         y+=x
         cards_to_remove=10-x+1
-        new_pile+=cards[-cards_to_remove]
-        del cards[-cards_to_remove]
-    new_pile+=cards
-    print(new_pile[24])
+        del cards[-cards_to_remove:]
+    cards+=hands
+    print(f'Case {i+1}: {cards[y-1]}')
 
-for _ in range(int(input())):
-    solve()
+for i in range(int(input())):
+    solve(i)
