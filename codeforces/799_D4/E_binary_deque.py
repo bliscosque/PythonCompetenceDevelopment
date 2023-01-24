@@ -3,8 +3,6 @@ import math
 def solve():
     n,s=[int(x) for x in input().split()]
     a=[int(x) for x in input().split()]
-    esqDir=[]
-    dirEsq=[]
     c=sum(a)
     if c==s: 
         print(0)
@@ -12,16 +10,12 @@ def solve():
     if c<s: 
         print(-1)
         return
-    val=c-s
-    for i,el in enumerate(a):
-        if el==1:
-            esqDir.append(i)
-    print(esqDir)
-    for i,el in enumerate(reversed(a)):
-        if el==1:
-            dirEsq.append(i)
-    print(dirEsq)
-    
+    sumSearched=c-s
+    sum=0
+    l,r=0,n-1
+    while sum<sumSearched:
+        pass
+
 
 
     #DP - explode recursao
