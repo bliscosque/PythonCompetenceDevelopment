@@ -10,13 +10,30 @@ def solve():
     if c<s: 
         print(-1)
         return
-    sumSearched=c-s
-    sum=0
-    l,r=0,n-1
-    while sum<sumSearched:
-        pass
+    sumA=0
+    l=0
+    maxA=0
 
-
+    #print(a,n,s)
+    for i in range(n):
+        x=a[i]
+        if x==1:
+            sumA+=1
+            #print(i,"added. New Sum:",sumA)
+        # passei da soma esperada...
+        if sumA>s:
+            #print(i,"bigger sum: ")
+            # remove first 1
+            while l<n and a[l]!=1 and l<i:
+                l+=1
+            sumA-=1
+            l+=1
+            #print(i,"new l:",l)
+        else: # como nao cheguei, atualizao o max
+            maxA=max(maxA,i-l+1)
+            #print(i,l, i-l+1)
+    #print("maxA:",maxA)
+    print(n-maxA)
 
     #DP - explode recursao
     # c=sum(a)
