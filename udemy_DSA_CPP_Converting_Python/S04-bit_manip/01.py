@@ -144,6 +144,7 @@ def main():
 
     print("10. Fast exponentiation")
     print(f"fastExpo(3,5): {fastExpo(3,5)}")
+    print()
 
     print("11. Count bits in python")
     n=11
