@@ -1,7 +1,7 @@
 def alltries (ans,sc,sl,ec,el,cnt):
     global found
     if found: return
-    if cnt==5: 
+    if cnt==3: 
         #print("Impossible")
         return -1
     if sc==ec and sl==el:
