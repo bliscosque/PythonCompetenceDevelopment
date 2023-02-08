@@ -7,24 +7,24 @@ for idx,ch in enumerate(line):
     bonus=False
     if ch=='W':
         stars+=1
-        if 6<=rank<=25 and line[idx-1]=='W' and line[idx-2]=='W':
+        if 6<=rank<=25 and idx>=2 and line[idx-1]=='W' and line[idx-2]=='W':
             stars+=1 #Bonus
             bonus=True
-        if 1<=rank<=10 and stars>=5:
+        if 1<=rank<=10 and stars>5:
             rank-=1
-            stars=1
+            stars=0
             if bonus: stars+=1
-        elif 11<=rank<=15 and stars>=4:
+        elif 11<=rank<=15 and stars>4:
             rank-=1
-            stars=1
+            stars=0
             if bonus: stars+=1
-        elif 16<=rank<=20 and stars>=3:
+        elif 16<=rank<=20 and stars>3:
             rank-=1
-            stars=1
+            stars=0
             if bonus: stars+=1
-        elif 21<=rank<=25 and stars>=2:
+        elif 21<=rank<=25 and stars>2:
             rank-=1
-            stars=1
+            stars=0
             if bonus: stars+=1
 
     if ch=='L':
