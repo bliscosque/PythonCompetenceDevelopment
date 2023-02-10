@@ -1,0 +1,5 @@
+a,b=input().split()
+ai=int(a[::-1])
+bi=int(b[::-1])
+#print(ai, bi)
+print(ai if ai>bi else bi)
