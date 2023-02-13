@@ -7,8 +7,10 @@ for k in range(n):
 maxsofar=prices[0]
 maxdecline=0
 for i in range(1,len(prices)):
-    maxsofar=max(maxsofar,prices[i])
-    maxdecline=max(maxdecline,maxsofar-prices[i])
+    if maxsofar<prices[i]:
+        maxsofar=prices[i]
+    elif maxdecline<maxsofar-prices[i]:
+        maxdecline=maxsofar-prices[i]
 
-if maxdecline<0: maxdecline=0
+if maxdecline<=0: maxdecline=0.0
 print(maxdecline)
