@@ -4,27 +4,27 @@
 
 import math
 from collections import defaultdict
-def strWindow(sBig,sSmall):
+def strWindow(s,p):
     #fBig=[0]*256
-    fSmall=defaultdict(int) #valor padrao=0
-    fBig=defaultdict(int)
-    for c in sSmall:
-        fSmall[c]+=1
+    fp=defaultdict(int) #valor padrao=0
+    fs=defaultdict(int)
+    for c in p:
+        fp[c]+=1
     
     cnt=0
     start=0
     start_idx=-1 # best window idx
     min_so_far=math.inf
-    for i in range (len(sBig)):
-        ch=sBig[i]
-        fBig[ch]+=1
+    for i in range (len(s)):
+        ch=s[i]
+        fs[ch]+=1
         
         #how many  chars were matched until now
-        if fSmall[ch]!=0 and fBig[ch]<=fSmall[ch]: cnt+=1
+        if fp[ch]!=0 and fs[ch]<=fp[ch]: cnt+=1
         #all chars are found... start contracting
-        if (cnt==len(sSmall)):
-            while fSmall[sSmall[start]]==0 or fBig[sBig[start]]>fSmall[sSmall[start]]:
-                fBig[sBig[start]]-=1
+        if cnt==len(p):
+            while fp[s[start]]==0 or fs[s[start]]>fp[p[start]]:
+                fs[s[start]]-=1
                 start+=1
             window_size=i-start+1
             if window_size<min_so_far:
@@ -32,7 +32,7 @@ def strWindow(sBig,sSmall):
                 start_idx=start
     if start_idx==-1:
         return "No window found"
-    return sBig[start_idx:start_idx+min_so_far]
+    return s[start_idx:start_idx+min_so_far]
 
 
 
