@@ -35,6 +35,16 @@ class SLL:
                 tempNode.next=newNode
                 newNode.next=nextNode
 
+    def reverse(self):
+        cur=self.head
+        prev=None
+        while cur:
+            tmp=cur.next
+            cur.next=prev
+            prev=cur
+            cur=tmp
+        self.head=prev
+
 sll = SLL()
 # insert at head
 sll.insertSLL(4, 0) # value,location
@@ -42,4 +52,8 @@ sll.insertSLL(3, 0) # value,location
 sll.insertSLL(2, 0) # value,location
 sll.insertSLL(1, 0) # value,location
 sll.insertSLL(0, 0) # value,location
+# insert at middle
+sll.insertSLL(-1, 1) # value,location
+print([node.value for node in sll])
+sll.reverse()
 print([node.value for node in sll])
