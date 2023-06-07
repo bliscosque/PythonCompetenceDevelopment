@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+<html>
+<head>
+    <title>Contador de Palavras</title>
+</head>
+<body>
+    <h1>Contador de Palavras</h1>
+    <form action="/count" method="post">
+        <textarea name="text" rows="10" cols="50"></textarea><br>
+        <input type="submit" value="Contar">
+    </form>
+</body>
+</html>
