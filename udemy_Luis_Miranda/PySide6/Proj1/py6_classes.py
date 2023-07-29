@@ -17,10 +17,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.setWindowTitle("Meu primeiro programa")
         self.central_widget.setLayout(self.layout)
-        self.show()
     
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     win=MainWindow()
+    win.show()
     sys.exit(app.exec())
