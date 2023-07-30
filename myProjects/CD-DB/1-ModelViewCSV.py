@@ -16,7 +16,7 @@ class MainWindow(QWidget):
     def setupMainWindow(self):
         self.model=QStandardItemModel()
         table_view=QTableView()
-        #table_view.setSelectionMode(QAbstractItemView.selectionMode.ExtendedSelection)
+        table_view.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         table_view.setModel(self.model)
 
         #self.model.setRowCount(3)
