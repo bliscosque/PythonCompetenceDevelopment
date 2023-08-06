@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import (QApplication,QMessageBox,QMainWindow,QListWidget,QAbstractItemView)
+from PySide6.QtWidgets import (QApplication,QMessageBox,QMainWindow,QListWidget,QAbstractItemView, QToolBar)
 from PySide6.QtGui import QAction
 
 class MainWindow(QMainWindow):
@@ -10,6 +10,7 @@ class MainWindow(QMainWindow):
     def initializeUI(self):
         self.create_actions()
         self.create_menus()
+        self.createToolBar()
         self.listWidget=QListWidget()
         self.setCentralWidget(self.listWidget)
         self.listWidget.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
@@ -83,6 +84,23 @@ class MainWindow(QMainWindow):
         state_menu.addAction(self.checked_action)
         state_menu.addAction(self.unchecked_action)
         state_menu.addAction(self.partially_action)
+
+    def createToolBar(self):
+        toolbar=QToolBar("Main Toolbar")
+        self.addToolBar(toolbar)
+
+        toolbar.addAction(self.new_action)
+        toolbar.addAction(self.open_action)
+        toolbar.addAction(self.save_action)
+        toolbar.addAction(self.save_as_action)
+        toolbar.addSeparator()
+        toolbar.addAction(self.add_action)
+        toolbar.addAction(self.remove_action)
+        toolbar.addSeparator()
+        toolbar.addAction(self.checked_action)
+        toolbar.addAction(self.unchecked_action)
+        toolbar.addAction(self.partially_action)
+
 
     def new(self):
         pass
