@@ -1,11 +1,13 @@
 import sys
-from PySide6.QtWidgets import (QApplication,QMessageBox,QMainWindow,QListWidget,QAbstractItemView, QToolBar)
+from PySide6.QtWidgets import (QApplication,QListWidgetItem,QMainWindow,QListWidget,QAbstractItemView, QToolBar)
 from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initializeUI()
+        self.file_changed=False
 
     def initializeUI(self):
         self.create_actions()
@@ -16,6 +18,7 @@ class MainWindow(QMainWindow):
         self.listWidget.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         
         self.show()
+        self.create()
 
     def create_actions(self):
         #File
@@ -115,21 +118,56 @@ class MainWindow(QMainWindow):
         self.close()
 
     def add(self):
-        pass
+        self.createItem(Qt.CheckState.Unchecked,"New Item")
+        self.file_changed=True
+
     def remove(self):
-        pass
+        list=self.listWidget.selectedItems()
+        for item in list:
+            self.listWidget.takeItem(self.listWidget.row(item))
+        self.file_changed=True
+
     def clear(self):
-        pass
+        self.listWidget.clear()
+        self.file_changed=True
+
     def select_all(self):
-        pass
+        self.listWidget.selectAll()
+
     def select_none(self):
-        pass
+        self.listWidget.clearSelection()
+
     def checked(self):
-        pass
+        list=self.listWidget.selectedItems()
+        for item in list:
+            item.setCheckState(Qt.CheckState.Checked)
+        self.file_changed=True
+
     def unchecked(self):
-        pass
+        list=self.listWidget.selectedItems()
+        for item in list:
+            item.setCheckState(Qt.CheckState.Unchecked)
+        self.file_changed=True
+    
     def partially(self):
+        list=self.listWidget.selectedItems()
+        for item in list:
+            item.setCheckState(Qt.CheckState.PartiallyChecked)
+        self.file_changed=True
+
+    def checkSave(self):
         pass
+
+    def create(self):
+        self.file_changed=False
+        self.file_name=""
+        self.listWidget.clear()
+
+    def createItem(self, state, name):
+        item=QListWidgetItem(name,self.listWidget)
+        item.setCheckState(state)
+        item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsEditable | Qt.ItemFlag.ItemIsAutoTristate | Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsSelectable)
+        self.listWidget.addItem(item)
 
 if __name__=='__main__':
     app=QApplication(sys.argv)
