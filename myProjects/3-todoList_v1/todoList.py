@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import (QApplication,QListWidgetItem,QMainWindow,QListWidget,QAbstractItemView, QToolBar)
+from PySide6.QtWidgets import (QApplication,QListWidgetItem,QMainWindow,QListWidget,QAbstractItemView, QToolBar,QFileDialog,QMessageBox)
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
 
@@ -106,13 +106,61 @@ class MainWindow(QMainWindow):
 
 
     def new(self):
-        pass
+        self.checkSave()
+        self.create()
+
     def open(self):
-        pass
+        self.checkSave()
+        path,_=QFileDialog.getOpenFileName(self,"Open","","To-do (*.td)")
+        if(path==""): return
+        self.open_int(path)
+    
+    def open_int(self,path):
+        try:
+            with open(path,"r") as file:
+                count=int(file.readline())
+                for i in range(count):
+                    state=Qt.CheckState(int(file.readline()))
+                    name=file.readline()[:-1]
+                    self.createItem(state,name)
+        except Exception as e:
+             QMessageBox.critical(self, "Error Opening File", str(e))
+        self.file_name=path
+        self.file_changed=False
+
+
     def save(self):
-        pass
+        if not self.file_name:
+            self.save_as()
+            return
+        self.save_int(self.file_name)
+    
     def save_as(self):
-        pass
+        path,_=QFileDialog.getSaveFileName(self,"Save","","To-do (*.td)")
+        if not path: return
+        self.save_int(path)
+
+    def save_int(self, path):
+        print(path)
+        try:
+            with open(path,"w") as file:
+                count=self.listWidget.count()
+                file.write(str(count)+"\n")
+                for i in range(count):
+                    item=self.listWidget.item(i)
+                    state=str(item.checkState())
+                    if "Unchecked" in state: 
+                        stateInt=0
+                    elif "artia" in state:
+                        stateInt=1
+                    else:
+                        stateInt=2
+                    file.write(str(stateInt)+"\n")
+                    file.write(item.text()+"\n")
+        except Exception as e:
+             QMessageBox.critical(self, "Error Saving File", str(e))
+        self.file_name=path
+        self.file_changed=False
     
     def exit(self):
         self.close()
