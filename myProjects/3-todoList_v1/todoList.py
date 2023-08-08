@@ -1,7 +1,9 @@
-import sys
+import sys, os
 from PySide6.QtWidgets import (QApplication,QListWidgetItem,QMainWindow,QListWidget,QAbstractItemView, QToolBar,QFileDialog,QMessageBox)
-from PySide6.QtGui import QAction
+from PySide6.QtGui import QAction, QIcon
 from PySide6.QtCore import Qt
+
+m_path=os.path.dirname(__file__)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -24,25 +26,34 @@ class MainWindow(QMainWindow):
         #File
         self.new_action=QAction("New")
         self.new_action.triggered.connect(self.new)
+        self.new_action.setIcon(QIcon(os.path.join(m_path,"./images/new.png")))
 
         self.open_action=QAction("Open")
         self.open_action.triggered.connect(self.open)
+        self.open_action.setIcon(QIcon(os.path.join(m_path,"./images/open.png")))
 
         self.save_action=QAction("Save")
         self.save_action.triggered.connect(self.save)
+        self.save_action.setIcon(QIcon(os.path.join(m_path,"./images/save.png")))
+
 
         self.save_as_action=QAction("Save As")
         self.save_as_action.triggered.connect(self.save_as)
+        self.save_as_action.setIcon(QIcon(os.path.join(m_path,"./images/save_as.png")))
+
 
         self.exit_action=QAction("Exit")
         self.exit_action.triggered.connect(self.exit)
 
+
         #Items
         self.add_action=QAction("Add")
         self.add_action.triggered.connect(self.add)
+        self.add_action.setIcon(QIcon(os.path.join(m_path,"./images/add.png")))
 
         self.remove_action=QAction("Remove")
         self.remove_action.triggered.connect(self.remove)
+        self.remove_action.setIcon(QIcon(os.path.join(m_path,"./images/delete.png")))
 
         self.clear_action=QAction("Clear")
         self.clear_action.triggered.connect(self.clear)
@@ -56,12 +67,18 @@ class MainWindow(QMainWindow):
         #State
         self.checked_action=QAction("Checked")
         self.checked_action.triggered.connect(self.checked)
+        self.checked_action.setIcon(QIcon(os.path.join(m_path,"./images/pencil_add.png")))
+
 
         self.unchecked_action=QAction("Unchecked")
         self.unchecked_action.triggered.connect(self.unchecked)
+        self.unchecked_action.setIcon(QIcon(os.path.join(m_path,"./images/pencil_delete.png")))
+
 
         self.partially_action=QAction("Partially")
         self.partially_action.triggered.connect(self.partially)
+        self.partially_action.setIcon(QIcon(os.path.join(m_path,"./images/pencil_go.png")))
+
 
     def create_menus(self):
         menu_bar=self.menuBar()
