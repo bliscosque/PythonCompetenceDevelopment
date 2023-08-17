@@ -1,7 +1,7 @@
 import sys, os
 from PySide6.QtWidgets import QApplication, QMainWindow, QListView, QToolBar
 from PySide6.QtGui import QAction, QIcon, QClipboard
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QStringListModel, QTimer
 
 m_path=os.path.dirname(__file__)
 
@@ -15,6 +15,19 @@ class MainWindow(QMainWindow):
         self.create_toolbar()
         self.listView=QListView()
         self.setCentralWidget(self.listView)
+        
+        # Attrs
+        self.m_changed=False
+        self.m_path=""
+        self.m_list=[]
+        self.m_model=QStringListModel()
+        self.m_timer=QTimer()
+
+        self.m_model.setStringList(self.m_list)
+        self.m_timer.timeout.connect(self.timeout)
+        self.m_timer.setInterval(500)
+        self.m_timer.start()
+        
 
         self.show()
     
@@ -80,7 +93,11 @@ class MainWindow(QMainWindow):
 
         
     def new(self):
-        pass
+        self.check_saved()
+        self.m_list.clear()
+        self.m_path=""
+        self.m_changed=False
+        self.m_model.setStringList(self.m_list)
 
     def open(self):
         pass
@@ -105,6 +122,11 @@ class MainWindow(QMainWindow):
     def delete(self):
         pass
 
+    def timeout(self):
+        print("timeout")
+
+    def check_saved(self):
+        pass
 
 if __name__=='__main__':
     app=QApplication(sys.argv)
