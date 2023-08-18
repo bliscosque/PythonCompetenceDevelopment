@@ -1,5 +1,5 @@
 import sys, os
-from PySide6.QtWidgets import QApplication, QMainWindow, QListView, QToolBar
+from PySide6.QtWidgets import QApplication, QMainWindow, QListView, QToolBar, QFileDialog, QMessageBox
 from PySide6.QtGui import QAction, QIcon, QClipboard
 from PySide6.QtCore import Qt, QStringListModel, QTimer
 
@@ -19,11 +19,13 @@ class MainWindow(QMainWindow):
         # Attrs
         self.m_changed=False
         self.m_path=""
+        self.m_last=""
         self.m_list=[]
         self.m_model=QStringListModel()
         self.m_timer=QTimer()
 
         self.m_model.setStringList(self.m_list)
+        self.listView.setModel(self.m_model)
         self.m_timer.timeout.connect(self.timeout)
         self.m_timer.setInterval(500)
         self.m_timer.start()
@@ -100,7 +102,25 @@ class MainWindow(QMainWindow):
         self.m_model.setStringList(self.m_list)
 
     def open(self):
-        pass
+        self.check_saved()
+        tmp=QFileDialog.getOpenFileName(self,"Open File")
+        if tmp=="":
+            return
+        
+        self.m_list.clear()
+
+        try:
+            with open(self.m_path,"r") as file:
+                lines=file.readlines()
+                for line in lines:
+                    self.m_list.append(line)
+                    
+        except Exception as e:
+             QMessageBox.critical(self, "Error Opening File", str(e))
+        self.m_path=tmp
+        self.m_changed=False
+        self.m_model.setStringList(self.m_list)
+        self.statusBar().showMessage("Opened",2000)
 
     def save(self):
         pass
@@ -109,24 +129,41 @@ class MainWindow(QMainWindow):
         pass
 
     def start(self):
-        pass
+        self.m_timer.start()
+        self.statusBar().showMessage("Listening to the clipboard",2000)
 
     def stop(self):
-        pass
+        self.m_timer.stop()
+        self.statusBar().showMessage("Manual mode",2000)
+
     def cut(self):
         pass
     def copy(self):
         pass
+
     def paste(self):
-        pass
+        self.timeout()
+
     def delete(self):
         pass
 
     def timeout(self):
-        print("timeout")
+        clipboard=QClipboard()
+        data=clipboard.text()
+        if data==self.m_last:
+            self.m_last=data
+            print(self.m_last)
+            if self.m_last not in self.m_list:
+                self.m_list.append(self.m_last)
+                self.m_model.setStringList(self.m_list)
+                self.statusBar.showMessage("Added to the clipboard", 2000)
 
     def check_saved(self):
-        pass
+        if not self.m_changed:
+            return
+        ans=QMessageBox.question(self,"Save Changes?","Would you like to save your changes?")
+        if ans==QMessageBox.standardButton.Yes:
+            self.save()
 
 if __name__=='__main__':
     app=QApplication(sys.argv)
