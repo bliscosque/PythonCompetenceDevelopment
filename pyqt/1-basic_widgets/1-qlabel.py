@@ -1,6 +1,6 @@
 import sys, os
 from PySide6.QtWidgets import QApplication, QWidget, QLabel
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QFont
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -18,7 +18,9 @@ class MainWindow(QWidget):
         # Create labels
         hello_label=QLabel(self)
         hello_label.setText("Hello")
-        hello_label.move(105,15)
+        hello_label.setFont(QFont("Arial",20))
+        hello_label.setWordWrap(True)
+        hello_label.move(85,15)
 
         curPath=os.path.dirname(os.path.realpath(__file__))
         image = curPath+"/images/world.png"
