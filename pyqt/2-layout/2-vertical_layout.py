@@ -23,8 +23,7 @@ class MainWindow(QWidget):
         header_label = QLabel("Chez PyQt6")
         header_label.setFont(QFont("Arial", 18))
         header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        question_label = QLabel(
-            "How would you rate your service?")
+        question_label = QLabel("How would you rate your service?")
         question_label.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         ratings = ["Satisfied", "Average", "Not Satisfied"]   
