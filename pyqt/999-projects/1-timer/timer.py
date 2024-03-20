@@ -28,7 +28,7 @@ class MainWindow(QWidget):
         name_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         # Create widgets for timers and buttons
-        self.t15_label = QLabel("15:00")
+        self.t15_label = QLabel("25:00")
         self.t15_label.setFont(QFont("Arial", 14))
         self.btn_15_start_pause = QPushButton('Start')
         btn_15_reset = QPushButton('Reset')
