@@ -1,22 +1,22 @@
-#baseado em grokking alg
 from collections import deque
+def bfs(G,start):
+    queue=deque([start]) # queue with start elem
+    visited=set([start]) 
 
-graph={}
-graph[0]=[1,3,4]
-graph[1]=[]
-graph[2]=[]
-graph[3]=[2]
-graph[4]=[]
+    while queue:
+        vertex=queue.popleft()
+        print(vertex, end=" ")
+        
+        for ngb in G[vertex]:
+            if ngb not in visited:
+                visited.add(ngb)
+                queue.append(ngb)
 
-def bfs(elem=0):
-    search_queue=deque()
-    search_queue+=graph[elem]
-    searched=set()
-    while search_queue:
-        el=search_queue.popleft()
-        if el not in searched:
-            print("searched: ", el)
-            search_queue+=graph[el]
-            searched.add(el)
-
-bfs()
+graph={
+    0: [2],
+    1: [2,3],
+    2: [1,4,0],
+    3: [1,4],
+    4: [3,2]
+}
+bfs(graph,1)
