@@ -1,0 +1,7 @@
+set FLASK_APP=app.py
+set FLASK_ENV=development
+
+# To run flask app
+flask run
+# --app (identificar o arquivo python a ser executado)
+# --debug (modo debug). Reinicia aplicação de tiver mudanças nos arquivos
